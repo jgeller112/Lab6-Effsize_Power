@@ -1,0 +1,141 @@
+---
+title: "Lab6: Effect Size and Power"
+subtitle: "Princeton University"
+author: "Jason Geller, Ph.D.(he/him)"
+date: 'Updated:`r Sys.Date()`'
+format: html
+toc: true
+toc_float: true
+html:
+    code-fold: true
+    code-tools: true
+bibliography: references.bib
+---
+
+In today's lab, we will be using data from [@tekin2021; Experiment 1]. In their study, participants viewed cue-target pairs (e.g., DOOR - HOUSE) during a study phase. After, groups either provided delayed JOLs (e.g., given a cue word, how likely is it on a scale of 0-100 you will recall the target on a later test), attempted to retrieve the target word (DOOR-?), or restudied the same cue-target pairs (DOOR-HOUSE). Each group then took a final test over the pairs. The aim of their study was to determine whether engaging in retrieval practice and providng delayed JOLs had similar effects on memory.
+
+To access the data for Experiment 1, please visit their OSF page--the link is in the paper.
+
+# Effect size
+
+> As a first step, you will need to read in the data from OSF. A link can be found in their paper.
+
+```{r}
+
+library(readxl)
+
+```
+
+> We are interested in the scores on the final test (`Total Final)` as a function of Condition (`Condition`). We will only be looking at three conditions: `Restudy`, `Overt retrieval` (retrieval practice), and `Cue-Only JOL`. Please select and filter the appropriate columns from the dataset.
+
+```{r}
+library(tidyverse)
+
+
+```
+
+> Visualize the differences between the three groups
+
+```{r}
+
+
+
+```
+
+> Next I want you to run a lm model. Use dummy coding and fit two models to get the pairwise comparisons between all the three conditions (you will need to use the relevel function and re-run the lm model to get the third comparison).
+
+```{r}
+library(broom)
+
+```
+
+> Take one of your models from above and use `emmeans` and `pairs` function to get the pairwise comparisons. This a much easier approach and one that I much prefer you use in your work.
+
+```{r}
+library(emmeans)
+
+```
+
+> Calculate Cohen's d by hand for each of the pairwise comparisons
+
+```{r}
+
+```
+
+> Use the `MOTE` package to get 95% CIs around each Cohen's d value
+
+```{r}
+
+library(MOTE)
+
+```
+
+> Write-up the results from the pairwise comparisons in APA style. The differences between each of the pairwise comparisons between each group and all relevant information (*t*, *p*, 95% CIs, size) . Make sure you correct for pairwise comparisons and state which correction you use
+
+# Power
+
+### `WebPower`
+
+-   Using the WebPower package calculate the the number of participants per group we need to have 90% power in our model to detect a difference.
+
+```{r}
+library(WebPower)
+
+```
+
+### `Superpower`
+
+-   Book going over `Superpower` <https://aaroncaldwell.us/SuperpowerBook/>
+
+```{=html}
+<!-- -->
+```
+-   Reviewer 2 asked you to calculate the power of @tekin2021 Experiment 1 after you ran it. Set up a study design using the `ANOVA_design` function from `Superpower`. Use the same means, SD, and n (use 40 per group as `SuperPower`cannot do unequal sample sizes for one-way designs) from their Experiment 1 study (excluding the one condition). Run a power analysis on this data.
+
+```{r}
+library(Superpower)
+
+```
+
+> What is our power to detect the overall effect of `Condition`? What about the pairwise comparisons between the groups?
+
+```{r}
+
+nsims = 100 # replace with a larger number
+
+```
+
+> What kind of power analysis would this be?
+>
+> What do you think of the power of this study design?
+
+-   We now want to run a replication study. Let's plan a study a study where we want to collect 100 Ps per group.
+
+    > Change `ANOVA_design` to reflect this. Set N = 100.
+
+```{r}
+
+```
+
+> What would the power be using the current study parameters to detect the overall effect of `Condition`? How about each pairwise comparison?
+
+```{r}
+
+
+```
+
+-   Let's say I want to power the study to be able to detect a .05 point difference on the final test between the Cue-Only JOLs and Overt Retrieval groups.
+
+> Change `ANOVA_design` to reflect *just this difference*. Set N = 40. What is our power to detect a .05 point difference with 40 per group?
+
+```{r}
+
+
+
+```
+
+> Plot the power curve just for this difference. What sample size is needed to achieve 90% power?
+
+```{r}
+
+```
