@@ -70,7 +70,7 @@ library(MOTE)
 
 ```
 
-> Write-up the results from the pairwise comparisons in APA style. The differences between each of the pairwise comparisons between each group and all relevant information (*t*, *p*, 95% CIs, size) . Make sure you correct for pairwise comparisons and state which correction you use
+> Write-up the results from the pairwise comparisons in APA style. Describe each pairwise comparison and provide all relevant details (i.e., *SE*, *t*, *p*, 95% CIs, size) . Make sure you correct for multiple comparisons and state which correction you used.
 
 # Power
 
